@@ -5,8 +5,15 @@ btn.addEventListener("click", function(){
 
     // TODO: добавить проверку введенного значения
     const startPosition = document.querySelector("#startPosition").value.toLowerCase();
-    let startX;
+    if (startPosition.length!=2){
+        window.alert("Ведено некорректное значение!");
+        document.querySelector("#startPosition").style="border:red 2px solid";
+        return;
+    }
 
+
+    let startX;
+    const startY = parseInt(startPosition[1]);
     // переводим букву клетки в цифровую координату
     switch(startPosition[0]) {
         case 'a':
@@ -33,10 +40,21 @@ btn.addEventListener("click", function(){
         case 'h':
             startX = 8;
             break;
+        default: startX = 0;
     }
 
+    // Проверка введенного значения
+    if ((startX == 0) || (startY <= 0 || startY >= 9)){
+        window.alert("Ведено некорректное значение!");
+        document.querySelector("#startPosition").style="border:red 2px solid";
+        return;
+    }
+    else{
+        document.querySelector("#startPosition").style="";
+    }
+
+
     // находим возможные ходы
-    const startY = parseInt(startPosition[1]);
     movesX.push(startX + 1);
     movesY.push(startY + 2);
     movesX.push(startX - 1);
